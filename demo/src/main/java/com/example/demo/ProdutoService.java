@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exceções.ProdutoNaoEncontradoException;
+
 @Service
 public class ProdutoService {
     @Autowired
@@ -30,8 +32,7 @@ public class ProdutoService {
     }
 
     public ProdutoDTO buscarProdutoPorId(int id){
-        Produto produto = repository.findById(id).orElse(null);
-        if(produto == null) return null;
+        Produto produto = repository.findById(id).orElseThrow(()-> new ProdutoNaoEncontradoException(id));
         ProdutoDTO resposta = copiarParaDTO(produto);
         return resposta;
         

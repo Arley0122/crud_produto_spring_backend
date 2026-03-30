@@ -35,8 +35,7 @@ public class ProdutoController {
     ){
         ProdutoDTO resposta = service.buscarProdutoPorId(id);
 
-        if(resposta != null) return ResponseEntity.status(200).body(resposta);
-        else return ResponseEntity.status(404).build(); 
+         return ResponseEntity.status(200).body(resposta);
     }
 
     @PostMapping("/produto")
