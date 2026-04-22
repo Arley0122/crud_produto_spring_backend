@@ -15,61 +15,62 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 public class ProdutoController {
 
-    @Autowired 
+    @Autowired
     private ProdutoService service;
 
     @GetMapping("/produto")
-    public ResponseEntity<?> buscarProdutos(){
-        
+    public ResponseEntity<?> buscarProdutos() {
+
         List<ProdutoDTO> produtos = service.buscarProdutos();
 
-        if(!produtos.isEmpty()) return ResponseEntity.status(200).body(produtos);
-        else return ResponseEntity.status(404).build();
+        if (!produtos.isEmpty())
+            return ResponseEntity.status(200).body(produtos);
+        else
+            return ResponseEntity.status(404).build();
     }
 
     @GetMapping("/produto/{id}")
     public ResponseEntity<ProdutoDTO> buscarProdutoPorId(
-        @PathVariable int id
-    ){
+            @PathVariable int id) {
         ProdutoDTO resposta = service.buscarProdutoPorId(id);
 
-         return ResponseEntity.status(200).body(resposta);
+        return ResponseEntity.status(200).body(resposta);
     }
 
     @PostMapping("/produto")
     public ResponseEntity<?> criarProduto(
-        @RequestBody @Valid ProdutoDTO dto
-    ){
+            @RequestBody @Valid ProdutoDTO dto) {
         ProdutoDTO salvo = service.criarProduto(dto);
         return ResponseEntity.status(200).body(salvo);
     }
 
     @PutMapping("/produto/{id}")
     public ResponseEntity<?> atualizarProdutoById(
-        @RequestBody @Valid ProdutoDTO dto,
-        @PathVariable int id
+            @RequestBody @Valid ProdutoDTO dto,
+            @PathVariable int id
 
-        ){
+    ) {
         ProdutoDTO dtoAtualizado = service.atualizarProdutoById(id, dto);
-        if(dtoAtualizado == null) return ResponseEntity.status(404).build();
+        if (dtoAtualizado == null)
+            return ResponseEntity.status(404).build();
         return ResponseEntity.status(200).body(dtoAtualizado);
     }
 
     @DeleteMapping("/produto/{id}")
     public ResponseEntity<?> deletarProdutoPorId(
-        @PathVariable int id
-    ){
+            @PathVariable int id) {
         boolean concluiu = service.deletarProdutoPorId(id);
-        if(!concluiu) return ResponseEntity.status(404).build();
+        if (!concluiu)
+            return ResponseEntity.status(404).build();
         return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/produto")
-    public ResponseEntity<?> deletarTodosProdutos(){
+    public ResponseEntity<?> deletarTodosProdutos() {
         service.deletarTodosProdutos();
         return ResponseEntity.status(204).build();
     }

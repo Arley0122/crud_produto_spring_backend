@@ -56,7 +56,6 @@ public class UsuarioController {
     //Buscar todos pedidos de um usuário por id
     @GetMapping("/{id}/pedidos")
     public ResponseEntity<List<PedidoDTO>> listarPedidosDoUsuario(@PathVariable Long id) {
-        // (opcional) você pode validar se o usuário existe, se quiser
         // UsuarioDTO usuario = usuarioService.buscarPorId(id);
         // if (usuario == null) return ResponseEntity.notFound().build();
 

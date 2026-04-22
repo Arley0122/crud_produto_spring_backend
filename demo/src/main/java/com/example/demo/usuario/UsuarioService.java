@@ -5,17 +5,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import com.example.demo.pedido.PedidoRepository;
 
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    private final PedidoRepository pedidoRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, PedidoRepository pedidoRepository ) {
+    public UsuarioService(UsuarioRepository usuarioRepository ) {
         this.usuarioRepository = usuarioRepository;
-        this.pedidoRepository = pedidoRepository;
     }
 
     // Criar usuário
